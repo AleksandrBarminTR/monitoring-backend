@@ -19,6 +19,7 @@ public class MonitorResponse {
   private boolean jiraResolved;
   private JiraTicketStatus jiraStatus;
   private String jiraLink;
+  private String jiraTitle;
   private boolean buildResolved;
   private String buildLink;
   private BuildStatus buildStatus;

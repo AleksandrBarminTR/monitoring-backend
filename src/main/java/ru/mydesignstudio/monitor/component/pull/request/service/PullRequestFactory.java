@@ -19,7 +19,7 @@ public class PullRequestFactory {
 
   public PullRequest create(GHPullRequest request) {
     return PullRequest.builder()
-        .url(request.getUrl())
+        .url(request.getHtmlUrl())
         .createdBy(findAuthor(request))
         .reviewers(findReviewers(request))
         .status(findStatus(request))

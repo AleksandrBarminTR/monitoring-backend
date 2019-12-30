@@ -10,5 +10,6 @@
   "https://github.com/tr/modern-ellis_service-ingest-alerter",
   "https://github.com/tr/modern-ellis_service-eurlex-rest",
   "https://github.com/tr/modern-ellis_service-feed-binary-aggregator",
-  "https://github.com/tr/modern-ellis_service-ingest-formex-transformer"
+  "https://github.com/tr/modern-ellis_service-ingest-formex-transformer",
+  "https://github.com/tr/modern-ellis_ellis-integration-tests"
 ]

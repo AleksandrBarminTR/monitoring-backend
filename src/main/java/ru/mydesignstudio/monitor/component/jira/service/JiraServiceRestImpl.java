@@ -11,6 +11,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import ru.mydesignstudio.monitor.component.jira.model.JiraResponse;
 import ru.mydesignstudio.monitor.component.jira.model.JiraTicket;
+import ru.mydesignstudio.monitor.component.jira.service.ticket.JiraTicketFactory;
 
 @Slf4j
 @Service

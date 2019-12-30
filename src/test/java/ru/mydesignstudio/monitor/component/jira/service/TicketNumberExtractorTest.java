@@ -16,9 +16,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import ru.mydesignstudio.monitor.component.jira.service.number.extractor.AlternativeNumberExtractor;
+import ru.mydesignstudio.monitor.component.jira.service.number.extractor.BasicNumberExtractor;
+import ru.mydesignstudio.monitor.component.jira.service.number.extractor.TicketNumberExtractor;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = TicketNumberExtractor.class)
+@ContextConfiguration(classes = {
+    TicketNumberExtractor.class,
+    BasicNumberExtractor.class,
+    AlternativeNumberExtractor.class
+})
 @TestPropertySource(locations = "classpath:/application.properties")
 class TicketNumberExtractorTest {
   @Autowired
@@ -28,7 +35,8 @@ class TicketNumberExtractorTest {
   @CsvSource({
       "UKBL-2010 Some Ticket,UKBL-2010",
       "ukbl-2010 Some,UKBL-2010",
-      "abcUKBL-2010def,UKBL-2010"
+      "abcUKBL-2010def,UKBL-2010",
+      "Ukbl 2010,UKBL-2010"
   })
   void extract_shouldExtractTicketNumber(String pullRequestTitle, String ticketNumber) {
     final Optional<String> extracted = unitUnderTest.extract(pullRequestTitle);

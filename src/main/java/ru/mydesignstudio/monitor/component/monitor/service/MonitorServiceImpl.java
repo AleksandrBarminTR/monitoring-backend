@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.mydesignstudio.monitor.component.jira.model.JiraTicket;
 import ru.mydesignstudio.monitor.component.jira.service.JiraService;
-import ru.mydesignstudio.monitor.component.jira.service.TicketNumberExtractor;
+import ru.mydesignstudio.monitor.component.jira.service.number.extractor.TicketNumberExtractor;
 import ru.mydesignstudio.monitor.component.monitor.model.MonitorRequest;
 import ru.mydesignstudio.monitor.component.monitor.model.MonitorResponse;
 import ru.mydesignstudio.monitor.component.participant.service.ParticipantService;
@@ -45,8 +45,9 @@ public class MonitorServiceImpl implements MonitorService {
     monitorResponse.setJiraResolved(jiraTicket.isPresent());
     if (jiraTicket.isPresent()) {
       final JiraTicket jira = jiraTicket.get();
-      monitorResponse.setJiraLink(jira.getLink());
+      monitorResponse.setJiraLink(jira.getLink().toExternalForm());
       monitorResponse.setJiraStatus(jira.getStatus());
+      monitorResponse.setJiraTitle(jira.getDescription());
     }
 
     return monitorResponse;

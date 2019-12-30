@@ -1,4 +1,4 @@
-package ru.mydesignstudio.monitor.component.jira.service;
+package ru.mydesignstudio.monitor.component.jira.service.ticket;
 
 import org.springframework.stereotype.Component;
 import ru.mydesignstudio.monitor.component.jira.model.JiraTicketStatus;

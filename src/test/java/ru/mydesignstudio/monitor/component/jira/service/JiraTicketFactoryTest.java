@@ -14,15 +14,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.mydesignstudio.monitor.component.jira.model.JiraResponse;
 import ru.mydesignstudio.monitor.component.jira.model.JiraTicket;
+import ru.mydesignstudio.monitor.component.jira.service.link.JiraLinkFactory;
+import ru.mydesignstudio.monitor.component.jira.service.ticket.JiraTicketFactory;
+import ru.mydesignstudio.monitor.component.jira.service.ticket.JiraTicketStatusFactory;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {
     JiraTicketFactory.class,
-    JiraTicketStatusFactory.class
+    JiraTicketStatusFactory.class,
+    JiraLinkFactory.class
 })
+@TestPropertySource("classpath:/application.properties")
 class JiraTicketFactoryTest {
 
   private Gson gson = new Gson();

@@ -6,7 +6,7 @@ import java.util.Optional;
 public enum JiraTicketStatus {
   OPEN("Open"),
   IN_PROGRESS("In Progress"),
-  CODE_REVIEW("code_review"),
+  CODE_REVIEW("Code Review by the TR dev lead"),
   CODE_REVIEWED("Development Completed"),
   CLOSED("Closed");
 

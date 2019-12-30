@@ -1,4 +1,4 @@
-package ru.mydesignstudio.monitor.component.pull.request.service;
+package ru.mydesignstudio.monitor.component.pull.request.service.repository;
 
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +28,9 @@ public class RepositoryServiceImpl implements RepositoryService {
   @PostConstruct
   public void init() {
     try (final Reader reader = new InputStreamReader(repositoryList.getInputStream())) {
-      final String[] repositoryStrings = gson.fromJson(reader, String[].class);
-      repositories = Arrays.stream(repositoryStrings)
-          .map(repositoryFactory::create)
+      final Map<String, String>[] descriptions = gson.fromJson(reader, Map[].class);
+      repositories = Arrays.stream(descriptions)
+          .map(description -> repositoryFactory.create(description.get("repositoryUrl"), description.get("jenkinsUrl")))
           .collect(Collectors.toList());
     } catch (IOException e) {
       throw new RuntimeException(e);

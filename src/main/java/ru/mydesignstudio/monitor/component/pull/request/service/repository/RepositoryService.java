@@ -1,4 +1,4 @@
-package ru.mydesignstudio.monitor.component.pull.request.service;
+package ru.mydesignstudio.monitor.component.pull.request.service.repository;
 
 import java.util.List;
 import ru.mydesignstudio.monitor.component.pull.request.model.Repository;

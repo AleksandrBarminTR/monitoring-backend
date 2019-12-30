@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public class ParticipantServiceImpl implements ParticipantService {
       participants = Arrays.asList(
           gson.fromJson(reader, Participant[].class)
       );
+      participants.sort((left, right) -> {
+        return StringUtils.compare(left.getName(), right.getName());
+      });
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

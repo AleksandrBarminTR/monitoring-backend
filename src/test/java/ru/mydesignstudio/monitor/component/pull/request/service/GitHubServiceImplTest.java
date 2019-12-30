@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.mydesignstudio.monitor.component.pull.request.model.GitHubStatus;
 import ru.mydesignstudio.monitor.component.participant.service.ParticipantService;
+import ru.mydesignstudio.monitor.component.pull.request.service.github.GitHubService;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest

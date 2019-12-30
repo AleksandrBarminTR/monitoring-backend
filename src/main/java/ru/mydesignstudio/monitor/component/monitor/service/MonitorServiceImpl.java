@@ -12,7 +12,7 @@ import ru.mydesignstudio.monitor.component.monitor.model.MonitorRequest;
 import ru.mydesignstudio.monitor.component.monitor.model.MonitorResponse;
 import ru.mydesignstudio.monitor.component.participant.service.ParticipantService;
 import ru.mydesignstudio.monitor.component.pull.request.model.PullRequest;
-import ru.mydesignstudio.monitor.component.pull.request.service.GitHubService;
+import ru.mydesignstudio.monitor.component.pull.request.service.github.GitHubService;
 
 @Service
 @RequiredArgsConstructor

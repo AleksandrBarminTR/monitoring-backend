@@ -1,15 +1,105 @@
 [
-  "https://github.com/tr/modern-ellis_ellis-parent",
-  "https://github.com/tr/modern-ellis_ellis-nginx",
-  "https://github.com/tr/modern-ellis_ellis-tools",
-  "https://github.com/tr/modern-ellis_app-editorial-new",
-  "https://github.com/tr/modern-ellis_service-common",
-  "https://github.com/tr/modern-ellis_service-feed-guids",
-  "https://github.com/tr/modern-ellis_service-feed-metadata",
-  "https://github.com/tr/modern-ellis_service-feed-chunker",
-  "https://github.com/tr/modern-ellis_service-ingest-alerter",
-  "https://github.com/tr/modern-ellis_service-eurlex-rest",
-  "https://github.com/tr/modern-ellis_service-feed-binary-aggregator",
-  "https://github.com/tr/modern-ellis_service-ingest-formex-transformer",
-  "https://github.com/tr/modern-ellis_ellis-integration-tests"
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_ellis-parent",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/COMMON/job/ELLIS-PARENT/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-common",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/COMMON/job/SERVICE-COMMON/job/BUILD-MR/"
+  },
+
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_app-editorial-new",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/UI/job/APP-EDITORIAL-NEW/job/BUILD-MR/"
+  },
+
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-ingest-alerter",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/INGEST/job/ALERTER/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-ingest-binary-downloader",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/INGEST/job/BINARY-DOWNLOADER/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-ingest-chunk-marker",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/INGEST/job/CHUNK-MARKER/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-ingest-formex-transformer",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/INGEST/job/FORMEX-TRANSFORMER/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-ingest-metadata-extractor",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/INGEST/job/METADATA-EXTRACTOR/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-ingest-nonformex-finder",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/INGEST/job/NONFORMEX-FINDER/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-ingest-typeidentifier",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/INGEST/job/TYPEIDENTIFIER/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-ingest-validator",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/INGEST/job/VALIDATOR/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-ingest-xmlfinder",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/INGEST/job/XMLFINDER/job/BUILD-MR/"
+  },
+
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-feed-aggregator",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/FEED/job/AGGREGATOR/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-feed-authorities",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/FEED/job/AUTHORITIES/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-feed-binary-aggregator",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/FEED/job/BINARY-AGGREGATOR/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-feed-chunk-metadata",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/FEED/job/CHUNK-METADATA/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-feed-chunker",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/FEED/job/CHUNKER/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-feed-dms",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/FEED/job/DMS/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-feed-document-details",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/FEED/job/DOCUMENT-DETAILS/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-feed-foepublisher",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/FEED/job/FOEPUBLISHER/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-feed-fulltext",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/FEED/job/FULLTEXT/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-feed-guid-resolver",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/FEED/job/GUID-RESOLVER/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-feed-guids",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/FEED/job/GUIDS/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-feed-link-resolver",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/FEED/job/LINK-RESOLVER/job/BUILD-MR/"
+  },
+  {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_service-feed-metadata",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/FEED/job/METADATA/job/BUILD-MR/"
+  }
 ]

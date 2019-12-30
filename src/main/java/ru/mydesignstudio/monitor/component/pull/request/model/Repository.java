@@ -8,4 +8,5 @@ import lombok.Value;
 public class Repository {
   private @NonNull String repositoryName;
   private @NonNull URL repositoryUrl;
+  private @NonNull URL jobLink;
 }

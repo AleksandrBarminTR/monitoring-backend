@@ -1,4 +1,4 @@
-package ru.mydesignstudio.monitor.component.pull.request.service;
+package ru.mydesignstudio.monitor.component.pull.request.service.github;
 
 import java.util.List;
 import java.util.Set;

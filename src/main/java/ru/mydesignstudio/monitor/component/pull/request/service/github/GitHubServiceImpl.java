@@ -1,4 +1,4 @@
-package ru.mydesignstudio.monitor.component.pull.request.service;
+package ru.mydesignstudio.monitor.component.pull.request.service.github;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -18,6 +18,7 @@ import ru.mydesignstudio.monitor.component.pull.request.model.Repository;
 import ru.mydesignstudio.monitor.component.pull.request.model.GitHubStatus;
 import ru.mydesignstudio.monitor.component.pull.request.model.PullRequest;
 import ru.mydesignstudio.monitor.component.participant.entity.Participant;
+import ru.mydesignstudio.monitor.component.pull.request.service.repository.RepositoryService;
 
 @Slf4j
 @Service

@@ -47,7 +47,7 @@ public class GitHubServiceImpl implements GitHubService {
 
   @Override
   public List<PullRequest> findPullRequests(Participant participant, Set<GitHubStatus> statuses) {
-    return repositoryService.findAll().stream()
+    return repositoryService.findAll().parallelStream()
         .map(this::getGitHubRepository)
         .flatMap(repository -> getPullRequests(repository, getIssueState(statuses)))
         .filter(pullRequest -> isCreatedBy(pullRequest, participant))

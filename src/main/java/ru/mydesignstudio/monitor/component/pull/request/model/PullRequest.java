@@ -4,11 +4,12 @@ import java.net.URL;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NonNull;
 import lombok.Value;
 import ru.mydesignstudio.monitor.component.participant.entity.Participant;
 
-@Value
+@Data
 @AllArgsConstructor
 @Builder
 public class PullRequest {

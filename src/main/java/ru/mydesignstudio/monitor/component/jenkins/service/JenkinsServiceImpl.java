@@ -18,4 +18,9 @@ public class JenkinsServiceImpl implements JenkinsService {
 
     return jenkinsRepository.findFirstByHeadHash(headHash);
   }
+
+  @Override
+  public JenkinsJob save(JenkinsJob jenkinsJob) {
+    throw new UnsupportedOperationException();
+  }
 }

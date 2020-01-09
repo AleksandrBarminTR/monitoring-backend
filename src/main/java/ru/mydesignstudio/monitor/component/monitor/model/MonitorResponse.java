@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.mydesignstudio.monitor.component.jenkins.entity.JenkinsJobStatus;
 import ru.mydesignstudio.monitor.component.jira.model.JiraTicketStatus;
-import ru.mydesignstudio.monitor.component.pull.request.model.BuildStatus;
 import ru.mydesignstudio.monitor.component.pull.request.model.GitHubStatus;
 
 @Data
@@ -22,5 +22,5 @@ public class MonitorResponse {
   private String jiraTitle;
   private boolean buildResolved;
   private String buildLink;
-  private BuildStatus buildStatus;
+  private JenkinsJobStatus buildStatus;
 }

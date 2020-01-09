@@ -2,12 +2,10 @@ package ru.mydesignstudio.monitor.component.pull.request.service.github;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.kohsuke.github.GHIssueState;
 import org.kohsuke.github.GHPullRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.mydesignstudio.monitor.component.participant.entity.Participant;
 import ru.mydesignstudio.monitor.component.participant.service.ParticipantService;
@@ -26,6 +24,7 @@ public class PullRequestFactory {
         .reviewers(findReviewers(request))
         .status(findStatus(request))
         .title(request.getTitle())
+        .headHash(request.getHead().getSha())
         .build();
   }
 

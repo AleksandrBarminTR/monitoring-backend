@@ -68,7 +68,7 @@ class JenkinsEnhancerTest {
 
     when(jenkinsService.findOneByHeadSha(headSha)).thenReturn(Optional.of(jenkinsJob));
     when(pullRequest.getHeadHash()).thenReturn(headSha);
-    when(jenkinsJob.getJobUrl()).thenReturn(new URL(jobUrl));
+    when(jenkinsJob.getBuildUrl()).thenReturn(new URL(jobUrl));
     when(jenkinsJob.getStatus()).thenReturn(JenkinsJobStatus.NOT_STARTED);
 
     final MonitorResponseBuilder builder = MonitorResponse.builder();

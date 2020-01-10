@@ -12,6 +12,7 @@ Product backlog (outdated but still):
   * Post comments when something happens with jobs
   * Create a scheduler to run jobs
   * Connect everything to the database
+  * ~~Get rid of H2 dependency~~
 * Deployment
   * Pack everything to the Docker container
 * Integration

@@ -8,11 +8,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "JENKINS_JOBS")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class JenkinsJob {
   @Id
   @Column(name = "JOB_ID")
@@ -25,11 +31,20 @@ public class JenkinsJob {
   @Column(name = "JOB_STATUS")
   private JenkinsJobStatus status;
 
-  @Column(name = "JOB_MERGE_REQUEST")
-  private URL mergeRequest;
+  @Column(name = "JOB_PULL_REQUEST")
+  private URL pullRequest;
 
-  @Column(name = "JOB_URL")
-  private URL jobUrl;
+  @Column(name = "JOB_FOLDER")
+  private String jobFolder;
+
+  @Column(name = "JOB_NAME")
+  private String jobName;
+
+  @Column(name = "JOB_BUILD_NUMBER")
+  private int buildNumber;
+
+  @Column(name = "JOB_BUILD_URL")
+  private URL buildUrl;
 
   @Column(name = "JOB_HEAD_HASH")
   private String headHash;

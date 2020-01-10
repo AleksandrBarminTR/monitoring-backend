@@ -17,5 +17,6 @@ public class PullRequest {
   private @NonNull GitHubStatus status;
   private @NonNull Participant createdBy;
   private @NonNull String headHash;
+  private @NonNull Repository repository;
   private @NonNull List<Participant> reviewers;
 }

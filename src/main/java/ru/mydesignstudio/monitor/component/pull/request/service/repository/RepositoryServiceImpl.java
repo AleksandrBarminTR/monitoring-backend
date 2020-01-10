@@ -4,9 +4,12 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -40,5 +43,14 @@ public class RepositoryServiceImpl implements RepositoryService {
   @Override
   public List<Repository> findAll() {
     return repositories;
+  }
+
+  @Override
+  public Optional<Repository> findByUrl(URL url) {
+    Objects.requireNonNull(url, "URL should not be null");
+
+    return repositories.stream()
+        .filter(repository -> repository.getRepositoryUrl().equals(url))
+        .findFirst();
   }
 }

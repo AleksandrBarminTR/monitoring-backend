@@ -11,11 +11,14 @@ import ru.mydesignstudio.monitor.component.participant.entity.Participant;
 import ru.mydesignstudio.monitor.component.participant.service.ParticipantService;
 import ru.mydesignstudio.monitor.component.pull.request.model.GitHubStatus;
 import ru.mydesignstudio.monitor.component.pull.request.model.PullRequest;
+import ru.mydesignstudio.monitor.component.pull.request.model.Repository;
+import ru.mydesignstudio.monitor.component.pull.request.service.repository.RepositoryService;
 
 @Component
 @RequiredArgsConstructor
 public class PullRequestFactory {
   private final ParticipantService participantService;
+  private final RepositoryService repositoryService;
 
   public PullRequest create(GHPullRequest request) {
     return PullRequest.builder()
@@ -25,7 +28,16 @@ public class PullRequestFactory {
         .status(findStatus(request))
         .title(request.getTitle())
         .headHash(request.getHead().getSha())
+        .repository(findRepository(request))
         .build();
+  }
+
+  private Repository findRepository(GHPullRequest request) {
+    return repositoryService.findByUrl(request.getHtmlUrl())
+        .orElseThrow(() -> new RuntimeException(String.format(
+            "Can't find repository with URL %s",
+            request.getHtmlUrl()
+        )));
   }
 
   private GitHubStatus findStatus(GHPullRequest request) {

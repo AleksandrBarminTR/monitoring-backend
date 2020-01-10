@@ -11,6 +11,10 @@ public class JenkinsJobFolderPathExtractor {
 
     urlString = StringUtils.substringAfter(urlString, "job/");
     urlString = StringUtils.substringBeforeLast(urlString, "job/");
+    urlString = StringUtils.removeAll(urlString, "job/");
+    if (urlString.charAt(urlString.length() - 1) == '/') {
+      urlString = urlString.substring(0, urlString.length() - 1);
+    }
 
     return urlString;
   }

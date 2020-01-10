@@ -34,7 +34,7 @@ class JenkinsJobFolderPathExtractorTest {
 
     assertAll(
         () -> assertNotNull(path),
-        () -> assertEquals("BUILD/job/COMMON/job/SERVICE-COMMON/", path)
+        () -> assertEquals("BUILD/COMMON/SERVICE-COMMON", path)
     );
   }
 }

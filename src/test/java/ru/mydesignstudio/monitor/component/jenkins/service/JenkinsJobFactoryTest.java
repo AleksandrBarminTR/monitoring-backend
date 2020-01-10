@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-import com.cdancy.jenkins.rest.domain.common.IntegerResponse;
-import java.util.Collections;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -45,16 +43,15 @@ class JenkinsJobFactoryTest {
 
   @Test
   void create_shouldGenerateJenkinsJob() {
-    final IntegerResponse response = IntegerResponse.create(24, Collections.emptyList());
     when(pullRequest.getRepository()).thenReturn(repository);
 
-    final JenkinsJob job = unitUnderTest.create(pullRequest, response);
+    final JenkinsJob job = unitUnderTest.create(pullRequest, 42);
 
     assertAll(
         () -> assertNotNull(job),
         () -> assertEquals(JenkinsJobStatus.NOT_STARTED, job.getStatus()),
         () -> assertEquals(pullRequest.getUrl(), job.getPullRequest()),
-        () -> assertEquals(response.value(), job.getBuildNumber()),
+        () -> assertEquals(42, job.getBuildNumber()),
         () -> assertNotNull(job.getCreated())
     );
   }

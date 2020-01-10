@@ -8,8 +8,6 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-import com.cdancy.jenkins.rest.domain.job.BuildInfo;
-import com.cdancy.jenkins.rest.features.JobsApi;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Disabled;
@@ -22,11 +20,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.mydesignstudio.monitor.component.jenkins.entity.JenkinsJob;
 import ru.mydesignstudio.monitor.component.jenkins.entity.JenkinsJobStatus;
+import ru.mydesignstudio.monitor.component.jenkins.service.client.BuildInfo;
+import ru.mydesignstudio.monitor.component.jenkins.service.client.JenkinsClient;
 
 @ExtendWith(MockitoExtension.class)
 class JenkinsJobStatusCheckerImplTest {
   @Mock
-  private JobsApi jobsApi;
+  private JenkinsClient jenkinsClient;
   @Mock
   private BuildInfo buildInfo;
   @Mock
@@ -54,8 +54,8 @@ class JenkinsJobStatusCheckerImplTest {
     when(jenkinsJob.getJobName()).thenReturn(RandomStringUtils.randomAlphabetic(10));
     when(jenkinsJob.getJobFolder()).thenReturn(RandomStringUtils.randomAlphabetic(10));
     when(jenkinsJob.getBuildNumber()).thenReturn(RandomUtils.nextInt());
-    when(jobsApi.buildInfo(anyString(), anyString(), anyInt())).thenReturn(buildInfo);
-    when(buildInfo.result()).thenReturn(jenkinsResponse);
+    when(jenkinsClient.buildInfo(anyString(), anyString(), anyInt())).thenReturn(buildInfo);
+    when(buildInfo.getResult()).thenReturn(jenkinsResponse);
 
     final JenkinsJobStatus status = unitUnderTest.check(jenkinsJob);
 
@@ -71,6 +71,8 @@ class JenkinsJobStatusCheckerImplTest {
     when(jenkinsJob.getJobName()).thenReturn(RandomStringUtils.randomAlphabetic(10));
     when(jenkinsJob.getJobFolder()).thenReturn(RandomStringUtils.randomAlphabetic(10));
     when(jenkinsJob.getBuildNumber()).thenReturn(RandomUtils.nextInt());
-    when(jobsApi.buildInfo(anyString(), anyString(), anyInt())).thenReturn(buildInfo);
+    when(jenkinsClient.buildInfo(anyString(), anyString(), anyInt())).thenReturn(buildInfo);
+
+    // TODO, there should be a test when job hasn't been started
   }
 }

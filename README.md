@@ -15,6 +15,7 @@ Product backlog (outdated but still):
   * ~~Get rid of H2 dependency~~
 * Deployment
   * Pack everything to the Docker container
+  * Pack MySql somewhere near
 * Integration
   * Configure GitHub Actions to run tests regularly
 * Improvements

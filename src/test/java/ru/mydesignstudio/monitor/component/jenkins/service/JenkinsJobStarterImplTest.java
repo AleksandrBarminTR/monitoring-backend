@@ -5,14 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.cdancy.jenkins.rest.domain.common.IntegerResponse;
-import com.cdancy.jenkins.rest.features.JobsApi;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -23,6 +22,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.mydesignstudio.monitor.component.jenkins.entity.JenkinsJob;
+import ru.mydesignstudio.monitor.component.jenkins.service.client.JenkinsClient;
 import ru.mydesignstudio.monitor.component.pull.request.model.PullRequest;
 import ru.mydesignstudio.monitor.component.pull.request.model.Repository;
 
@@ -41,7 +41,7 @@ class JenkinsJobStarterImplTest {
   @Mock
   private JenkinsJobParametersBuilder parametersBuilder;
   @Mock
-  private JobsApi jobsApi;
+  private JenkinsClient jenkinsClient;
   @InjectMocks
   private JenkinsJobStarterImpl unitUnderTest;
 
@@ -56,14 +56,13 @@ class JenkinsJobStarterImplTest {
     final String jobFolder = RandomStringUtils.randomAlphabetic(10);
     final Map<String, List<String>> params = mock(Map.class);
     final JenkinsJob jenkinsJob = mock(JenkinsJob.class);
-    final IntegerResponse jenkinsResponse = mock(IntegerResponse.class);
 
     when(pullRequest.getRepository()).thenReturn(repository);
     when(jobNameExtractor.extract(repository)).thenReturn(jobName);
     when(jobFolderPathExtractor.extract(repository)).thenReturn(jobFolder);
     when(parametersBuilder.build(pullRequest)).thenReturn(params);
-    when(jobFactory.create(any(PullRequest.class), any(IntegerResponse.class))).thenReturn(jenkinsJob);
-    when(jobsApi.buildWithParameters(anyString(), anyString(), any(Map.class))).thenReturn(jenkinsResponse);
+    when(jobFactory.create(any(PullRequest.class), anyInt())).thenReturn(jenkinsJob);
+    when(jenkinsClient.build(anyString(), anyString(), any(Map.class))).thenReturn(42);
 
     final JenkinsJob startedJob = unitUnderTest.start(pullRequest);
 
@@ -75,8 +74,8 @@ class JenkinsJobStarterImplTest {
     final ArgumentCaptor<String> jobFolderCaptor = ArgumentCaptor.forClass(String.class);
     final ArgumentCaptor<Map> paramsCaptor = ArgumentCaptor.forClass(Map.class);
 
-    verify(jobsApi, times(1))
-        .buildWithParameters(jobFolderCaptor.capture(), jobNameCaptor.capture(),
+    verify(jenkinsClient, times(1))
+        .build(jobFolderCaptor.capture(), jobNameCaptor.capture(),
             paramsCaptor.capture());
 
     assertAll(

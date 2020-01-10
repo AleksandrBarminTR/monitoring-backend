@@ -1,0 +1,30 @@
+version: '3'
+services:
+  db:
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: monitoring
+      MYSQL_USER: monitoring
+      MYSQL_PASSWORD: monitoring
+    ports:
+      - 3306:3306
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  portainer:
+    image: portainer/portainer
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data_database:/data
+
+volumes:
+  portainer_data_database:

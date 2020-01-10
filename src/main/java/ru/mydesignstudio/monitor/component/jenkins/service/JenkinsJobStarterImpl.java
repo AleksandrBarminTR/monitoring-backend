@@ -1,13 +1,12 @@
 package ru.mydesignstudio.monitor.component.jenkins.service;
 
-import com.cdancy.jenkins.rest.domain.common.IntegerResponse;
-import com.cdancy.jenkins.rest.features.JobsApi;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.mydesignstudio.monitor.component.jenkins.entity.JenkinsJob;
+import ru.mydesignstudio.monitor.component.jenkins.service.client.JenkinsClient;
 import ru.mydesignstudio.monitor.component.pull.request.model.PullRequest;
 
 @Component
@@ -16,7 +15,7 @@ public class JenkinsJobStarterImpl implements JenkinsJobStarter {
   private final JenkinsJobParametersBuilder parametersBuilder;
   private final JenkinsJobNameExtractor nameExtractor;
   private final JenkinsJobFolderPathExtractor folderPathExtractor;
-  private final JobsApi jenkinsJobsApi;
+  private final JenkinsClient jenkinsClient;
   private final JenkinsJobFactory jobFactory;
 
   @Override
@@ -27,9 +26,9 @@ public class JenkinsJobStarterImpl implements JenkinsJobStarter {
     final String jobName = nameExtractor.extract(pullRequest.getRepository());
     final String jobFolder = folderPathExtractor.extract(pullRequest.getRepository());
 
-    final IntegerResponse response = jenkinsJobsApi
-        .buildWithParameters(jobFolder, jobName, parameters);
+    final Integer buildNumber = jenkinsClient
+        .build(jobFolder, jobName, parameters);
 
-    return jobFactory.create(pullRequest, response);
+    return jobFactory.create(pullRequest, buildNumber);
   }
 }

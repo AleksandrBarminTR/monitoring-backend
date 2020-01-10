@@ -6,19 +6,26 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.mydesignstudio.monitor.component.jenkins.entity.JenkinsJob;
+import ru.mydesignstudio.monitor.component.jenkins.entity.JenkinsJobStatus;
 import ru.mydesignstudio.monitor.component.jenkins.repository.JenkinsRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -74,6 +81,45 @@ class JenkinsServiceTest {
 
   @Test
   void save_shouldSaveJobs() {
-    fail("Not implemented yet but should be");
+    final JenkinsJob job = mock(JenkinsJob.class);
+
+    unitUnderTest.save(job);
+
+    verify(jenkinsRepository, times(1)).save(job);
+  }
+
+  @Test
+  void save_shouldCheckInputParameters() {
+    assertThrows(NullPointerException.class, () -> {
+      unitUnderTest.save(null);
+    });
+  }
+
+  @ParameterizedTest
+  @EnumSource(JenkinsJobStatus.class)
+  void findAllByStatus_shouldReturnJobsByStatus(JenkinsJobStatus status) {
+    final JenkinsJob job = mock(JenkinsJob.class);
+    when(job.getStatus()).thenReturn(status);
+    when(jenkinsRepository.findAllByStatus(any(JenkinsJobStatus.class))).thenReturn(
+        Collections.singletonList(job));
+
+    final List<JenkinsJob> jobs = unitUnderTest.findJobsByStatus(status);
+
+    assertAll(
+        () -> assertNotNull(jobs),
+        () -> assertFalse(jobs.isEmpty()),
+        () -> {
+          for (JenkinsJob jenkinsJob : jobs) {
+            assertEquals(status, jenkinsJob.getStatus());
+          }
+        }
+    );
+  }
+
+  @Test
+  void findAllByStatus_shouldCheckInputParameters() {
+    assertThrows(NullPointerException.class, () -> {
+      unitUnderTest.findJobsByStatus(null);
+    });
   }
 }

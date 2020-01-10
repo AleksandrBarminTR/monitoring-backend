@@ -6,11 +6,15 @@ Product backlog (outdated but still):
 * Jenkins job statutes:
   * ~~Entities to store the status~~
   * ~~Service to retrieve jobs by head hash~~
-  * Create a job to check for new pull requests - In progress
-  * Create a job to check status of existing jobs
+  * ~~Create a job to check for new pull requests~~
+  * ~~Create a job to check status of existing jobs~~
+  * Access Jenkins using REST API in order to check jobs
+  * Post comments when something happens with jobs
   * Create a scheduler to run jobs
   * Connect everything to the database
 * Deployment
   * Pack everything to the Docker container
 * Integration
   * Configure GitHub Actions to run tests regularly
+* Improvements
+  * Switch to Gradle instead of Maven

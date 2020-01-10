@@ -1,10 +1,12 @@
 package ru.mydesignstudio.monitor.component.jenkins.service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.mydesignstudio.monitor.component.jenkins.entity.JenkinsJob;
+import ru.mydesignstudio.monitor.component.jenkins.entity.JenkinsJobStatus;
 import ru.mydesignstudio.monitor.component.jenkins.repository.JenkinsRepository;
 
 @Service
@@ -21,6 +23,15 @@ public class JenkinsServiceImpl implements JenkinsService {
 
   @Override
   public JenkinsJob save(JenkinsJob jenkinsJob) {
-    throw new UnsupportedOperationException();
+    Objects.requireNonNull(jenkinsJob, "Job should not be null");
+
+    return jenkinsRepository.save(jenkinsJob);
+  }
+
+  @Override
+  public List<JenkinsJob> findJobsByStatus(JenkinsJobStatus status) {
+    Objects.requireNonNull(status, "Status should not be null");
+
+    return jenkinsRepository.findAllByStatus(status);
   }
 }

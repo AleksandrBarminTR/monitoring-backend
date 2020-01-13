@@ -10,12 +10,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import java.net.URI;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,13 +25,15 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 @ExtendWith(MockitoExtension.class)
 class JenkinsClientRestImplTest {
 
   @Mock
-  private BuildNumberExtractor numberExtractor;
+  private QueueNumberExtractor numberExtractor;
   @Mock
   private BasicAuthenticationHeaderFactory headerFactory;
   @Mock
@@ -63,14 +61,15 @@ class JenkinsClientRestImplTest {
     final HttpHeaders redirectHeaders = new HttpHeaders();
     redirectHeaders.set("Location", "http://localhost:8080/job/folder1/build/42/");
 
+    when(headerFactory.build(anyString(), anyString())).thenReturn(new HttpHeaders());
     when(buildUriBuilder.build(any(URL.class), anyString(), anyString())).thenReturn(jobUri);
     when(restTemplate
         .exchange(any(URI.class), any(HttpMethod.class), any(HttpEntity.class), any(Class.class)))
         .thenReturn(
-            new ResponseEntity(redirectHeaders, HttpStatus.PERMANENT_REDIRECT));
+            new ResponseEntity(redirectHeaders, HttpStatus.CREATED));
     when(numberExtractor.extract(any(URL.class))).thenReturn(42);
 
-    final Integer buildNumber = unitUnderTest
+    final Integer executable = unitUnderTest
         .build("folder1/folder2/folder3", "jobName", createParams());
 
     verify(headerFactory, times(1)).build(anyString(), anyString());
@@ -79,14 +78,15 @@ class JenkinsClientRestImplTest {
     verify(numberExtractor, times(1)).extract(any(URL.class));
 
     assertAll(
-        () -> assertNotNull(buildNumber),
-        () -> assertEquals(42, buildNumber)
+        () -> assertNotNull(executable),
+        () -> assertEquals(42, executable)
     );
   }
 
   @Test
   void build_ifNotARedirectAnExceptionShouldBeThrown() {
     final URI jobUri = URI.create("http://localhost:8080/job/folder1/build/buildWithParameters");
+    when(headerFactory.build(anyString(), anyString())).thenReturn(new HttpHeaders());
     when(restTemplate
         .exchange(any(URI.class), any(HttpMethod.class), any(HttpEntity.class), any(Class.class)))
         .thenReturn(ResponseEntity.ok(123));
@@ -100,9 +100,10 @@ class JenkinsClientRestImplTest {
   @Test
   void build_ifNoLocationHeaderAnExceptionShouldBeThrown() {
     final URI jobUri = URI.create("http://localhost:8080/job/folder1/build/buildWithParameters");
+    when(headerFactory.build(anyString(), anyString())).thenReturn(new HttpHeaders());
     when(restTemplate
         .exchange(any(URI.class), any(HttpMethod.class), any(HttpEntity.class), any(Class.class)))
-        .thenReturn(new ResponseEntity(HttpStatus.PERMANENT_REDIRECT));
+        .thenReturn(new ResponseEntity(HttpStatus.CREATED));
     when(buildUriBuilder.build(any(URL.class), anyString(), anyString())).thenReturn(jobUri);
 
     assertThrows(RuntimeException.class, () -> {
@@ -110,9 +111,9 @@ class JenkinsClientRestImplTest {
     });
   }
 
-  private Map<String, List<String>> createParams() {
-    final Map<String, List<String>> params = Maps.newHashMap();
-    params.put("buildHash", Lists.newArrayList(RandomStringUtils.randomAlphabetic(10)));
+  private MultiValueMap<String, String> createParams() {
+    final MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+    params.add("buildHash", RandomStringUtils.randomAlphabetic(10));
     return params;
   }
 }

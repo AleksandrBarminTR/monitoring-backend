@@ -51,7 +51,7 @@ class JenkinsJobFactoryTest {
         () -> assertNotNull(job),
         () -> assertEquals(JenkinsJobStatus.NOT_STARTED, job.getStatus()),
         () -> assertEquals(pullRequest.getUrl(), job.getPullRequest()),
-        () -> assertEquals(42, job.getBuildNumber()),
+        () -> assertEquals(42, job.getQueueNumber()),
         () -> assertNotNull(job.getCreated())
     );
   }

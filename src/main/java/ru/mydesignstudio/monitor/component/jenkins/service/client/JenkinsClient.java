@@ -1,10 +1,11 @@
 package ru.mydesignstudio.monitor.component.jenkins.service.client;
 
-import java.util.List;
-import java.util.Map;
+import org.springframework.util.MultiValueMap;
 
 public interface JenkinsClient {
-  Integer build(String jobFolders, String jobName, Map<String, List<String>> params);
+  Integer build(String jobFolders, String jobName, MultiValueMap<String, String> params);
 
   BuildInfo buildInfo(String jobFolders, String jobName, Integer buildNumber);
+
+  BuildInfo buildInfo(int queueNumber);
 }

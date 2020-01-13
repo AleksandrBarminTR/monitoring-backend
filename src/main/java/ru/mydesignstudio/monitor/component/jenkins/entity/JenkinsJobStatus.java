@@ -4,5 +4,6 @@ public enum JenkinsJobStatus {
   NOT_STARTED,
   IN_PROGRESS,
   FAILED,
-  SUCCESS
+  SUCCESS,
+  MISSED
 }

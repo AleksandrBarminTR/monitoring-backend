@@ -32,7 +32,7 @@ public class MonitorServiceImpl implements MonitorService {
     for (final PullRequest request : pullRequests) {
       final MonitorResponseBuilder builder = MonitorResponse.builder();
 
-      enhancers.parallelStream()
+      enhancers.stream()
           .forEach(action -> action.enhance(builder, request));
 
       responses.add(builder.build());

@@ -1,10 +1,9 @@
 package ru.mydesignstudio.monitor.component.jenkins.service;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.MultiValueMap;
 import ru.mydesignstudio.monitor.component.jenkins.entity.JenkinsJob;
 import ru.mydesignstudio.monitor.component.jenkins.service.client.JenkinsClient;
 import ru.mydesignstudio.monitor.component.pull.request.model.PullRequest;
@@ -22,7 +21,7 @@ public class JenkinsJobStarterImpl implements JenkinsJobStarter {
   public JenkinsJob start(PullRequest pullRequest) {
     Objects.requireNonNull(pullRequest, "Pull request should not be null");
 
-    final Map<String, List<String>> parameters = parametersBuilder.build(pullRequest);
+    final MultiValueMap<String, String> parameters = parametersBuilder.build(pullRequest);
     final String jobName = nameExtractor.extract(pullRequest.getRepository());
     final String jobFolder = folderPathExtractor.extract(pullRequest.getRepository());
 

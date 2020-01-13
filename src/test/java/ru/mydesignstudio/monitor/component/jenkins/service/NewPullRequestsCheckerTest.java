@@ -19,6 +19,7 @@ import ru.mydesignstudio.monitor.component.jenkins.entity.JenkinsJob;
 import ru.mydesignstudio.monitor.component.jenkins.service.job.NewPullRequestsChecker;
 import ru.mydesignstudio.monitor.component.jenkins.service.job.OpenedPullRequestsProvider;
 import ru.mydesignstudio.monitor.component.pull.request.model.PullRequest;
+import ru.mydesignstudio.monitor.component.pull.request.service.github.GitHubNotificator;
 
 @ExtendWith(MockitoExtension.class)
 class NewPullRequestsCheckerTest {
@@ -32,6 +33,8 @@ class NewPullRequestsCheckerTest {
   private PullRequest pullRequest;
   @Mock
   private OpenedPullRequestsProvider openedPullRequestsProvider;
+  @Mock
+  private GitHubNotificator gitHubNotificator;
   @InjectMocks
   private NewPullRequestsChecker unitUnderTest;
 

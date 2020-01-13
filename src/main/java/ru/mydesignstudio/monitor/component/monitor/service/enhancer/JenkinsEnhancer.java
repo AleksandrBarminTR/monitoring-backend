@@ -22,7 +22,9 @@ public class JenkinsEnhancer implements MonitorResponseEnhancer {
     if (jenkinsJob.isPresent()) {
       final JenkinsJob job = jenkinsJob.get();
 
-      builder.buildLink(job.getBuildUrl().toExternalForm());
+      if (job.getBuildUrl() != null) {
+        builder.buildLink(job.getBuildUrl().toExternalForm());
+      }
       builder.buildStatus(job.getStatus());
     }
   }

@@ -19,4 +19,5 @@ public class PullRequest {
   private @NonNull String headHash;
   private @NonNull Repository repository;
   private @NonNull List<Participant> reviewers;
+  private @NonNull Integer pullRequestId;
 }

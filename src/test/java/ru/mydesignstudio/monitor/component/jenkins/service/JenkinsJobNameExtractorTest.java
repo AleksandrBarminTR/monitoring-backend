@@ -27,7 +27,7 @@ class JenkinsJobNameExtractorTest {
 
   @Test
   void extract_shouldExtractName() throws Exception {
-    when(repository.getRepositoryUrl()).thenReturn(new URL(
+    when(repository.getJobLink()).thenReturn(new URL(
         "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/COMMON/job/SERVICE-COMMON/job/BUILD-MR/"));
 
     final String jobName = unitUnderTest.extract(repository);

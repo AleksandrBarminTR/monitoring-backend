@@ -34,4 +34,9 @@ public class JenkinsServiceImpl implements JenkinsService {
 
     return jenkinsRepository.findAllByStatus(status);
   }
+
+  @Override
+  public List<JenkinsJob> findUnstartedJobs() {
+    return jenkinsRepository.findAllByBuildNumber(0);
+  }
 }

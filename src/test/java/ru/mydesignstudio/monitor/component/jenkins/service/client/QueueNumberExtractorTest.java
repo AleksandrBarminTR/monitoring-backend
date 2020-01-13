@@ -11,9 +11,9 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class BuildNumberExtractorTest {
+class QueueNumberExtractorTest {
   @InjectMocks
-  private BuildNumberExtractor unitUnderTest;
+  private QueueNumberExtractor unitUnderTest;
 
   @Test
   void check_everythingStarts() {
@@ -22,11 +22,11 @@ class BuildNumberExtractorTest {
 
   @Test
   void extract_shouldExtractCorrectly() throws Exception {
-    final Integer extracted = unitUnderTest.extract(new URL("http://localhost:8080/build/42/"));
+    final Integer extracted = unitUnderTest.extract(new URL("http://localhost:8080/queue/item/6/"));
 
     assertAll(
         () -> assertNotNull(extracted),
-        () -> assertEquals(42, extracted)
+        () -> assertEquals(6, extracted)
     );
   }
 }

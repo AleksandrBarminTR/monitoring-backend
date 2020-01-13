@@ -48,4 +48,7 @@ public class JenkinsJob {
 
   @Column(name = "JOB_HEAD_HASH")
   private String headHash;
+
+  @Column(name = "JOB_QUEUE_NUMBER")
+  private int queueNumber;
 }

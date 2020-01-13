@@ -4,20 +4,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.mydesignstudio.monitor.component.participant.service.ParticipantService;
 import ru.mydesignstudio.monitor.component.pull.request.model.PullRequest;
 import ru.mydesignstudio.monitor.component.pull.request.service.github.GitHubService;
+import ru.mydesignstudio.monitor.component.pull.request.service.repository.RepositoryService;
 
 @Component
 @RequiredArgsConstructor
 public class OpenedPullRequestsProvider {
   private final GitHubService gitHubService;
-  private final ParticipantService participantService;
+  private final RepositoryService repositoryService;
 
   public List<PullRequest> provide() {
-    return participantService.findAll()
+    return repositoryService.findAll()
         .stream()
-        .map(participant -> gitHubService.findAllOpenedPullRequests(participant))
+        // TODO, remove this filter
+        .filter(repository -> repository.getRepositoryName().contains("app-editorial-new"))
+        .map(repository -> gitHubService.findAllOpenedPullRequests(repository))
         .flatMap(List::stream)
         .collect(Collectors.toList());
   }

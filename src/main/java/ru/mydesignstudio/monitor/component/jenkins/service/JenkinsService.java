@@ -11,4 +11,6 @@ public interface JenkinsService {
   JenkinsJob save(JenkinsJob jenkinsJob);
 
   List<JenkinsJob> findJobsByStatus(JenkinsJobStatus status);
+
+  List<JenkinsJob> findUnstartedJobs();
 }

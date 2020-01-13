@@ -1,0 +1,33 @@
+<leftItem _class='hudson.model.Queue$LeftItem'>
+  <action _class='hudson.model.ParametersAction'>
+    <parameter _class='hudson.model.StringParameterValue'>
+      <name>HEAD_HASH</name>
+      <value>e1786a5e218ac647214a42a7d2a03c047f5acee1</value>
+    </parameter>
+  </action>
+  <action _class='hudson.model.CauseAction'>
+    <cause _class='hudson.model.Cause$UserIdCause'>
+      <shortDescription>Started by user Jenkins</shortDescription>
+      <userId>jenkins</userId>
+      <userName>Jenkins</userName>
+    </cause>
+  </action>
+  <blocked>false</blocked>
+  <buildable>false</buildable>
+  <id>25605</id>
+  <inQueueSince>1578904953152</inQueueSince>
+  <params>
+    HEAD_HASH=e1786a5e218ac647214a42a7d2a03c047f5acee1</params>
+  <stuck>false</stuck>
+  <task _class='org.jenkinsci.plugins.workflow.job.WorkflowJob'>
+    <name>BUILD-MR</name>
+    <url>http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/UI/job/APP-EDITORIAL-NEW/job/BUILD-MR/</url>
+    <color>red</color>
+  </task>
+  <url>queue/item/25605/</url>
+  <cancelled>false</cancelled>
+  <executable _class='org.jenkinsci.plugins.workflow.job.WorkflowRun'>
+    <number>6</number>
+    <url>http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/UI/job/APP-EDITORIAL-NEW/job/BUILD-MR/6/</url>
+  </executable>
+</leftItem>

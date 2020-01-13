@@ -7,7 +7,7 @@ import ru.mydesignstudio.monitor.component.pull.request.model.Repository;
 @Component
 public class JenkinsJobFolderPathExtractor {
   public String extract(Repository repository) {
-    String urlString = repository.getRepositoryUrl().toExternalForm();
+    String urlString = repository.getJobLink().toExternalForm();
 
     urlString = StringUtils.substringAfter(urlString, "job/");
     urlString = StringUtils.substringBeforeLast(urlString, "job/");

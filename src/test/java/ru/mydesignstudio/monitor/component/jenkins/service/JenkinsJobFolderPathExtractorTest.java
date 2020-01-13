@@ -27,7 +27,7 @@ class JenkinsJobFolderPathExtractorTest {
 
   @Test
   void extract_shouldExtractWithoutHost() throws Exception {
-    when(repository.getRepositoryUrl()).thenReturn(new URL(
+    when(repository.getJobLink()).thenReturn(new URL(
         "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/COMMON/job/SERVICE-COMMON/job/BUILD-MR/"));
 
     final String path = unitUnderTest.extract(repository);

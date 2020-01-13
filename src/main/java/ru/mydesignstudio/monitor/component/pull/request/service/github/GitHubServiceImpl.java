@@ -1,5 +1,6 @@
 package ru.mydesignstudio.monitor.component.pull.request.service.github;
 
+import com.google.common.collect.Sets;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -8,10 +9,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.kohsuke.github.GHRepository;
 import org.springframework.stereotype.Service;
 import ru.mydesignstudio.monitor.component.participant.entity.Participant;
 import ru.mydesignstudio.monitor.component.pull.request.model.GitHubStatus;
 import ru.mydesignstudio.monitor.component.pull.request.model.PullRequest;
+import ru.mydesignstudio.monitor.component.pull.request.model.Repository;
 import ru.mydesignstudio.monitor.component.pull.request.service.repository.RepositoryService;
 
 @Slf4j
@@ -48,10 +51,21 @@ public class GitHubServiceImpl implements GitHubService {
     Objects.requireNonNull(participant, "Participant shouldn't be null");
     Objects.requireNonNull(statuses, "Status shouldn't be null");
 
-    return repositoryService.findAll().parallelStream()
+    return repositoryService.findAll()
+        .stream()
         .map(repositoryProvider::provide)
         .flatMap(repository -> pullRequestProvider.provide(repository, statusConverter.convert(statuses)).stream())
         .filter(pullRequest -> participantFilter.test(pullRequest, participant))
+        .map(pullRequestFactory::create)
+        .collect(Collectors.toList());
+  }
+
+  @Override
+  public List<PullRequest> findAllOpenedPullRequests(Repository repository) {
+    final GHRepository ghRepository = repositoryProvider.provide(repository);
+    final Set<GitHubStatus> statutes = Sets.immutableEnumSet(GitHubStatus.OPEN);
+    return pullRequestProvider.provide(ghRepository, statusConverter.convert(statutes))
+        .stream()
         .map(pullRequestFactory::create)
         .collect(Collectors.toList());
   }

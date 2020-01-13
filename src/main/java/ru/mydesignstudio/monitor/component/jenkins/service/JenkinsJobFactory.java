@@ -14,9 +14,9 @@ public class JenkinsJobFactory {
   private final JenkinsJobNameExtractor jobNameExtractor;
   private final JenkinsJobFolderPathExtractor jobFolderPathExtractor;
 
-  public JenkinsJob create(PullRequest pullRequest, Integer buildNumber) {
+  public JenkinsJob create(PullRequest pullRequest, Integer queueNumber) {
     Objects.requireNonNull(pullRequest, "Pull request should not be null");
-    Objects.requireNonNull(buildNumber, "Jenkins response should not be null");
+    Objects.requireNonNull(queueNumber, "Number in the queue should be provided");
 
     return JenkinsJob.builder()
         .created(LocalDateTime.now())
@@ -24,7 +24,7 @@ public class JenkinsJobFactory {
         .pullRequest(pullRequest.getUrl())
         .jobName(jobNameExtractor.extract(pullRequest.getRepository()))
         .jobFolder(jobFolderPathExtractor.extract(pullRequest.getRepository()))
-        .buildNumber(buildNumber)
+        .queueNumber(queueNumber)
         .headHash(pullRequest.getHeadHash())
         .build();
   }

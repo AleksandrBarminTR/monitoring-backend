@@ -38,10 +38,10 @@ class JenkinsJobParametersBuilderTest {
 
     assertAll(
         () -> assertNotNull(params),
-        () -> assertNotNull(params.get("buildHead")),
-        () -> assertFalse(params.get("buildHead").isEmpty()),
-        () -> assertEquals(1, params.get("buildHead").size()),
-        () -> assertEquals(headSha, params.get("buildHead").get(0))
+        () -> assertNotNull(params.get("HEAD_HASH")),
+        () -> assertFalse(params.get("HEAD_HASH").isEmpty()),
+        () -> assertEquals(1, params.get("HEAD_HASH").size()),
+        () -> assertEquals(headSha, params.get("HEAD_HASH").get(0))
     );
   }
 

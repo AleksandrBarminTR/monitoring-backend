@@ -18,12 +18,25 @@ public class JenkinsJobStatusCheckerImpl implements JenkinsJobStatusChecker {
   public JenkinsJobStatus check(JenkinsJob jenkinsJob) {
     Objects.requireNonNull(jenkinsJob, "Jenkins job should be provided");
 
-    final BuildInfo info = jenkinsClient
-        .buildInfo(jenkinsJob.getJobFolder(), jenkinsJob.getJobName(), jenkinsJob.getBuildNumber());
+    final BuildInfo info;
+    if (isStarted(jenkinsJob)) {
+      info = jenkinsClient
+          .buildInfo(jenkinsJob.getJobFolder(), jenkinsJob.getJobName(), jenkinsJob.getBuildNumber());
+    } else {
+      info = jenkinsClient.buildInfo(jenkinsJob.getQueueNumber());
+    }
 
-    if (StringUtils.equalsIgnoreCase("SUCCESS", info.getResult())) {
+    if (StringUtils.equalsIgnoreCase("IN_PROGRESS", info.getResult())) {
+      // TODO, get rid of side effect
+      jenkinsJob.setBuildNumber(info.getBuildNumber());
+      return JenkinsJobStatus.IN_PROGRESS;
+    } else if (StringUtils.equalsIgnoreCase("COMPLETED_UNKNOWN_RESULTS", info.getResult())) {
+      return JenkinsJobStatus.MISSED;
+    } else if (StringUtils.equalsIgnoreCase("SUCCESS", info.getResult())) {
+      jenkinsJob.setBuildUrl(info.getUrl());
       return JenkinsJobStatus.SUCCESS;
     } else if (StringUtils.equalsIgnoreCase("FAILURE", info.getResult())) {
+      jenkinsJob.setBuildUrl(info.getUrl());
       return JenkinsJobStatus.FAILED;
     } else if (StringUtils.isEmpty(info.getResult())) {
       return JenkinsJobStatus.IN_PROGRESS;
@@ -33,5 +46,9 @@ public class JenkinsJobStatusCheckerImpl implements JenkinsJobStatusChecker {
           info.getResult()
       ));
     }
+  }
+
+  private boolean isStarted(JenkinsJob jenkinsJob) {
+    return jenkinsJob.getBuildNumber() != 0;
   }
 }

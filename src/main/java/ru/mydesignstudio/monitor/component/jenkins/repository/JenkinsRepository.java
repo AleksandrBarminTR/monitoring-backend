@@ -12,4 +12,6 @@ public interface JenkinsRepository extends JpaRepository<JenkinsJob, Long> {
   Optional<JenkinsJob> findFirstByHeadHash(String headHash);
 
   List<JenkinsJob> findAllByStatus(JenkinsJobStatus status);
+
+  List<JenkinsJob> findAllByBuildNumber(int buildNumber);
 }

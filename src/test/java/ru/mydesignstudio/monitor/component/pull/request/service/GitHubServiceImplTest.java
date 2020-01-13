@@ -65,7 +65,7 @@ class GitHubServiceImplTest {
   @Test
   void findAllOpenedPullRequests_shouldCheckInputArguments() {
     assertThrows(NullPointerException.class, () -> {
-      unitUnderTest.findAllOpenedPullRequests(null);
+      unitUnderTest.findAllOpenedPullRequests((Participant) null);
     });
   }
 

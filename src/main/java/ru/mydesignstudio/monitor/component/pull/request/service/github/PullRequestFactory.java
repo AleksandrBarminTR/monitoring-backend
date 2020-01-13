@@ -29,14 +29,15 @@ public class PullRequestFactory {
         .title(request.getTitle())
         .headHash(request.getHead().getSha())
         .repository(findRepository(request))
+        .pullRequestId(request.getNumber())
         .build();
   }
 
   private Repository findRepository(GHPullRequest request) {
-    return repositoryService.findByUrl(request.getHtmlUrl())
+    return repositoryService.findByUrl(request.getRepository().getHtmlUrl())
         .orElseThrow(() -> new RuntimeException(String.format(
             "Can't find repository with URL %s",
-            request.getHtmlUrl()
+            request.getRepository().getHtmlUrl()
         )));
   }
 

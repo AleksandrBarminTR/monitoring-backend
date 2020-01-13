@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kohsuke.github.GHCommitPointer;
 import org.kohsuke.github.GHPullRequest;
+import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHUser;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -45,6 +46,8 @@ class PullRequestFactoryTest {
   private RepositoryService repositoryService;
   @Mock
   private Repository repository;
+  @Mock
+  private GHRepository ghRepository;
   @InjectMocks
   private PullRequestFactory unitUnderTest;
 
@@ -54,7 +57,8 @@ class PullRequestFactoryTest {
     when(pullRequest.getUser()).thenReturn(author);
     when(pullRequest.getTitle()).thenReturn(pullRequestTitle);
     when(pullRequest.getHead()).thenReturn(headCommitPointer);
-    when(pullRequest.getHtmlUrl()).thenReturn(new URL(repositoryUrl));
+    when(pullRequest.getRepository()).thenReturn(ghRepository);
+    when(ghRepository.getHtmlUrl()).thenReturn(new URL(repositoryUrl));
     when(headCommitPointer.getSha()).thenReturn(pullRequestHeadSha);
 
     when(author.getLogin()).thenReturn(participantLogin);

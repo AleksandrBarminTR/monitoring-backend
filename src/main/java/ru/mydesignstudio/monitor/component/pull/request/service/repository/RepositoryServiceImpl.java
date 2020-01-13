@@ -50,7 +50,7 @@ public class RepositoryServiceImpl implements RepositoryService {
     Objects.requireNonNull(url, "URL should not be null");
 
     return repositories.stream()
-        .filter(repository -> repository.getRepositoryUrl().equals(url))
+        .filter(repository -> repository.getRepositoryUrl().toExternalForm().equalsIgnoreCase(url.toExternalForm()))
         .findFirst();
   }
 }

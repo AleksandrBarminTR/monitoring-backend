@@ -10,5 +10,9 @@ ADD docker/entrypoint.sh /opt/entrypoint.sh
 EXPOSE 8080
 
 ENV JARFILE ${jar_path}
+ENV DB_HOST localhost
+ENV DB_NAME monitoring
+ENV DB_USERNAME monitoring
+ENV DB_PASSWORD monitoring
 
 ENTRYPOINT ["/opt/entrypoint.sh"]

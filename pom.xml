@@ -9,7 +9,7 @@
 		<relativePath/>
 	</parent>
 	<groupId>ru.mydesignstudio</groupId>
-	<artifactId>monitor</artifactId>
+	<artifactId>monitor-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>monitor</name>
 

@@ -8,7 +8,9 @@ public enum JiraTicketStatus {
   IN_PROGRESS("In Progress"),
   CODE_REVIEW("Code Review by the TR dev lead"),
   CODE_REVIEWED("Development Completed"),
-  CLOSED("Closed");
+  DEPLOYED_READY_TO_TEST("Deployed Ready to Test"),
+  CLOSED("Closed"),
+  UNKNOWN("Unknown");
 
   private final String jiraEquivalent;
 

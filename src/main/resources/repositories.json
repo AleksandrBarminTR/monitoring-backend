@@ -5,6 +5,10 @@
   },
 
   {
+    "repositoryUrl": "https://github.com/tr/modern-ellis_ellis-services-release",
+    "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/COMMON/job/ELLIS-PARENT/job/BUILD-MR/"
+  },
+  {
     "repositoryUrl": "https://github.com/tr/modern-ellis_ellis-parent",
     "jenkinsUrl": "http://ukmy-dvm-53.tlr.thomson.com:8080/job/BUILD/job/COMMON/job/ELLIS-PARENT/job/BUILD-MR/"
   },
